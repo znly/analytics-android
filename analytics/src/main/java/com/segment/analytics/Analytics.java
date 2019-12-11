@@ -498,7 +498,15 @@ public class Analytics {
       traits.putUserId(userId);
     }
     if (!isNullOrEmpty(newTraits)) {
-      traits.putAll(newTraits);
+      for(Map.Entry<String, Object> entry : newTraits.entrySet()) {
+          if (entry.getValue() instanceof Integer) {
+              traits.put(entry.getKey(), Long.valueOf((Integer) entry.getValue()));
+          } else if (entry.getValue() instanceof Float) {
+              traits.put(entry.getKey(), Double.valueOf((Float) entry.getValue()));
+          } else {
+              traits.put(entry.getKey(), entry.getValue());
+          }
+      }
     }
 
     traitsCache.set(traits); // Save the new traits
