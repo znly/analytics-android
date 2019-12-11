@@ -404,10 +404,11 @@ public class Traits extends ValueMap {
 
     // todo: remove. This is legacy behaviour from before we started namespacing the entire shared
     // preferences object and were namespacing keys instead.
-    private static final String TRAITS_CACHE_PREFIX = "traits-";
+    static final String TRAITS_CACHE_PREFIX = "traits-";
+    static final String SENT_TRAITS_CACHE_PREFIX = "sent-traits-";
 
-    Cache(Context context, Cartographer cartographer, String tag) {
-      super(context, cartographer, TRAITS_CACHE_PREFIX + tag, tag, Traits.class);
+    Cache(Context context, Cartographer cartographer, String tag, String prefix) {
+      super(context, cartographer, prefix + tag, tag, Traits.class);
     }
 
     @Override
