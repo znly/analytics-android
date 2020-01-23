@@ -162,7 +162,11 @@ public class Cartographer {
         reader.nextNull(); // consume the null token
         return null;
       case NUMBER:
-        return reader.nextDouble();
+        try {
+          return reader.nextLong();
+        } catch (NumberFormatException nfe) {
+          return reader.nextDouble();
+        }
       case STRING:
         return reader.nextString();
       default:
